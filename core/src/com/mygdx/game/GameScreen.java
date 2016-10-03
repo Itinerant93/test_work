@@ -25,45 +25,16 @@ public class GameScreen implements Screen {
     MyGdxGame myGdxGame;
     private Stage stage;
 
-    public class MyActor extends Actor {
-
-        Texture texture = new Texture("square.png");
-        float actorX = 0, actorY = 0;
-        public boolean started = false;
-
-        public MyActor() {
-            setBounds(actorX, actorY, texture.getWidth(), texture.getHeight());
-            addListener(new InputListener() {
-                public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                    ((MyActor)event.getTarget()).started = true;
-                    return true;
-                }
-            });
-        }
-
-        @Override
-        public void draw(Batch batch, float alpha) {
-            batch.draw(texture, actorX, actorY);
-        }
-
-        @Override
-        public void act(float Delta) {
-            if (started) {
-                actorX += 5;
-                actorY +=5;
-            }
-        }
-    }
-
     public GameScreen(final MyGdxGame myGdxGame) {
 
         this.myGdxGame = myGdxGame;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        MyActor myActor = new MyActor();
-        myActor.setTouchable(Touchable.enabled);
-        stage.addActor(myActor);
+        MyActor myActor1 = new MyActor("square.png", 3);
+        myActor1.setPosition(0, 200);
+        myActor1.setTouchable(Touchable.enabled);
+        stage.addActor(myActor1);
     }
 
     @Override
@@ -103,5 +74,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
     }
 }
