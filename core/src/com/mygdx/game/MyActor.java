@@ -14,14 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class MyActor extends Actor {
 
     private Texture texture; // = new Texture("square.png");
-    public float actorX = 0, actorY = 0;
+    public float actorX, actorY;
     private boolean started = false;
-    private int duration = 0;
+    private int duration;
 
     public MyActor(String name_texture, int _duration) {
 
         texture = new Texture(name_texture);
         duration = _duration;
+        actorX = 0;
+        actorY = parabola(actorX);
         setBounds(actorX, actorY, texture.getWidth(), texture.getHeight());
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -31,10 +33,11 @@ public class MyActor extends Actor {
         });
     }
 
-    public void setPosition (float x, float y) {
+    public void setPosition (float x) {
         actorX = x;
-        actorY = y;
+        actorY = parabola(actorX);
         setBounds(actorX, actorY, texture.getWidth(), texture.getHeight());
+        x0 = actorX;
     }
 
     @Override
@@ -46,18 +49,26 @@ public class MyActor extends Actor {
 
     @Override
     public void act(float Delta) {
-        
+
         if (started) {
             progress += Delta / duration;
             actorX = x0 + progress * deltaX;
+            actorY = getY(actorX);
 
-            Gdx.app.log("MyTag", "Progress = " + progress + " deltaX = " + deltaX);
-
-            if (progress >= 1f) {
+            if (progress >= 1f || actorX >=Math.abs(Gdx.graphics.getWidth() - 128 + 1)) {
                 x0 = actorX;
                 deltaX *= -1;
                 progress = 0;
             }
         }
+    }
+
+    private float getY(float x) {
+        return parabola(x);
+    }
+
+    public float parabola (float x) {
+        return (float) Math.pow((x - Gdx.graphics.getWidth()/2.0f + 128 / 2), 2) / (Gdx.graphics.getHeight() / 2.0f - 64) * (-1)
+                + Gdx.graphics.getHeight() - 128 +30;
     }
 }

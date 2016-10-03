@@ -31,10 +31,12 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        MyActor myActor1 = new MyActor("square.png", 3);
-        myActor1.setPosition(0, 200);
+        MyActor myActor1 = new MyActor("yellow_bird.png", 3);
+        myActor1.setPosition(Gdx.graphics.getWidth() - 128);
+        MySecondActor myActor2 = new MySecondActor("blue_bird.png", 3, 0);
         myActor1.setTouchable(Touchable.enabled);
         stage.addActor(myActor1);
+        stage.addActor(myActor2);
     }
 
     @Override
