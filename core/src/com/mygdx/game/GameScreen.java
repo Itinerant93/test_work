@@ -3,18 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 /**
  * Created by Cool_Prog on 28.09.2016.
@@ -31,12 +20,12 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        MyActor myActor1 = new MyActor("yellow_bird.png", 3);
-        myActor1.setPosition(Gdx.graphics.getWidth() - 128);
-        MySecondActor myActor2 = new MySecondActor("blue_bird.png", 3, 0);
-        myActor1.setTouchable(Touchable.enabled);
-        stage.addActor(myActor1);
-        stage.addActor(myActor2);
+        FirstActor firstActor = new FirstActor("yellow_bird.png", 3, 0);
+        //myActor1.setPosition(Gdx.graphics.getWidth() - 128);
+        SecondActor secondActor = new SecondActor("blue_bird.png", 4, Gdx.graphics.getWidth() - 128);
+        //myActor1.setTouchable(Touchable.enabled);
+        stage.addActor(firstActor);
+        stage.addActor(secondActor);
     }
 
     @Override
